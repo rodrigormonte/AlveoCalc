@@ -24,7 +24,7 @@ const CSP = [
 
 function cspDeProducao(): Plugin {
   return {
-    name: 'fisiohelp-csp',
+    name: 'alveocalc-csp',
     apply: 'build',
     transformIndexHtml(html) {
       return {
@@ -49,8 +49,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icon.svg', 'pwa-180.png', 'pwa-192.png', 'pwa-512.png', 'maskable-512.png'],
       manifest: {
-        name: 'Fisiohelp — Calculadoras e curvas de ventilação mecânica',
-        short_name: 'Fisiohelp',
+        name: 'AlveoCalc — Calculadoras e curvas de ventilação mecânica',
+        short_name: 'AlveoCalc',
         description:
           'Calculadoras e curvas de ventilação mecânica para fisioterapeutas intensivistas e cardiorrespiratórios.',
         lang: 'pt-BR',

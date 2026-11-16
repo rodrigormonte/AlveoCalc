@@ -1,6 +1,6 @@
-# Segurança e arquitetura do Fisiohelp
+# Segurança e arquitetura do AlveoCalc
 
-Este documento registra por que o Fisiohelp é um **site estático/PWA sem backend** e como os
+Este documento registra por que o AlveoCalc é um **site estático/PWA sem backend** e como os
 requisitos de segurança foram tratados.
 
 ## Escopo

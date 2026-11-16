@@ -59,7 +59,7 @@ export default function App() {
       favoritos: 'Favoritos',
       sobre: 'Sobre',
     }
-    document.title = `Fisiohelp — ${nomes[rota.pagina] ?? 'Ventilação mecânica'}`
+    document.title = `AlveoCalc — ${nomes[rota.pagina] ?? 'Ventilação mecânica'}`
   }, [rota])
 
   const alternarFavorito = (chave: string) => {
@@ -99,12 +99,12 @@ export default function App() {
             type="button"
             className="brand"
             onClick={() => navegar('/calculadoras')}
-            aria-label="Fisiohelp — ir para o início"
+            aria-label="AlveoCalc — ir para o início"
           >
             <img src="./icon.svg" alt="" width={38} height={38} />
             <span className="brand-text">
               <span className="brand-name" style={{ display: 'block' }}>
-                Fisiohelp
+                AlveoCalc
               </span>
               <span className="brand-sub" style={{ display: 'block' }}>
                 Calculadoras e curvas de VM
@@ -159,7 +159,7 @@ export default function App() {
         <footer className="rodape">
           <div className="rodape-marca">
             <img src="./icon.svg" alt="" width={20} height={20} />
-            Fisiohelp · versão {VERSAO}
+            AlveoCalc · versão {VERSAO}
           </div>
           <p>{DISCLAIMER}</p>
           <p style={{ marginTop: 6 }}>
@@ -203,7 +203,7 @@ export default function App() {
             <div className="modal-icon">
               <AlertIcon size={24} />
             </div>
-            <h2 id="titulo-aviso">Antes de usar o Fisiohelp</h2>
+            <h2 id="titulo-aviso">Antes de usar o AlveoCalc</h2>
             <p>
               Este app é uma ferramenta de apoio à decisão para profissionais de saúde. Ele
               não avalia pacientes, não emite diagnóstico e não substitui o julgamento

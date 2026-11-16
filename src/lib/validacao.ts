@@ -1,7 +1,7 @@
 /**
  * Validação centralizada de números e de dados persistidos.
  *
- * O Fisiohelp não interpreta expressões matemáticas digitadas pelo usuário:
+ * O AlveoCalc não interpreta expressões matemáticas digitadas pelo usuário:
  * as fórmulas são funções puras e os campos só aceitam números simples.
  * A regex abaixo rejeita hexadecimal, notação científica, `Infinity`, `NaN`,
  * separadores indevidos e strings muito longas.

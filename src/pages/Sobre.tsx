@@ -27,7 +27,7 @@ export function SobrePage() {
         <span className="eyebrow">
           <InfoIcon size={14} /> Sobre
         </span>
-        <h1 className="page-title">Fisiohelp</h1>
+        <h1 className="page-title">AlveoCalc</h1>
         <p className="page-lead">
           Calculadoras e curvas de ventilação mecânica para fisioterapeutas intensivistas e
           cardiorrespiratórios. Versão {VERSAO}, em português do Brasil.
@@ -41,10 +41,9 @@ export function SobrePage() {
           </h2>
           <ul>
             <li>
-              <b>8 calculadoras:</b> peso predito, volume corrente alvo (6–10 mL/kg, com
-              destaque para 6–8 na SARA), volume minuto, relação P/F com classificação de
-              Berlim, driving pressure, complacência estática, resistência de vias aéreas e
-              relação I:E.
+              <b>20 calculadoras e consultas</b> organizadas em Adulto, Pediatria e Geral,
+              incluindo volume corrente pediátrico e adulto, CNAF por população, HACOR, ROX,
+              interpretação integrada da gasometria e cálculo unificado de iNO.
             </li>
             <li>
               <b>11 fichas de curvas:</b> VCV, PCV e PSV de referência, mais as oito

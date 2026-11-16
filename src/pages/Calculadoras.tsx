@@ -41,8 +41,7 @@ export function CalculadorasPage({ favoritos, alternarFavorito }: Props) {
         </span>
         <h1 className="page-title">Cálculo à beira do leito</h1>
         <p className="page-lead">
-          Oito fórmulas de ventilação mecânica com a fórmula aplicada, a referência e a
-          interpretação ao lado do resultado.
+          Fórmulas organizadas por população, com a fonte ligada a cada resultado.
         </p>
       </header>
 
@@ -69,7 +68,7 @@ export function CalculadorasPage({ favoritos, alternarFavorito }: Props) {
       )}
 
       {grupos.map((grupo) => {
-        const doGrupo = filtradas.filter((calc) => calc.grupo === grupo)
+        const doGrupo = filtradas.filter((calc) => (calc.populacao ?? 'Adulto') === grupo)
         if (doGrupo.length === 0) return null
         return (
           <section key={grupo} aria-labelledby={`grupo-${grupo}`}>
@@ -130,6 +129,10 @@ function valoresIniciais(calc: Calculadora) {
   return estado
 }
 
+function campoVisivel(campo: Campo, valores: Record<string, string>) {
+  return !campo.quando || campo.quando.valores.includes(valores[campo.quando.campoId] ?? '')
+}
+
 function validar(campo: Campo, valor: string): string | null {
   if (campo.tipo === 'opcao') return valor ? null : 'Escolha uma opção.'
 
@@ -185,7 +188,9 @@ export function CalculadoraDetalhe({ id, favoritos, alternarFavorito }: Props & 
 
   const alterar = (campoId: string, valor: string) => {
     setValores((atual) => ({ ...atual, [campoId]: valor }))
-    setErros((atual) => {
+    if (calc.campos.some((campo) => campo.quando?.campoId === campoId)) {
+      setErros({})
+    } else setErros((atual) => {
       if (!atual[campoId]) return atual
       const proximo = { ...atual }
       delete proximo[campoId]
@@ -198,7 +203,7 @@ export function CalculadoraDetalhe({ id, favoritos, alternarFavorito }: Props & 
   const calcular = (evento: FormEvent) => {
     evento.preventDefault()
     const novosErros: Record<string, string> = {}
-    for (const campo of calc.campos) {
+    for (const campo of calc.campos.filter((item) => campoVisivel(item, valores))) {
       const erro = validar(campo, valores[campo.id] ?? '')
       if (erro) novosErros[campo.id] = erro
     }
@@ -210,7 +215,18 @@ export function CalculadoraDetalhe({ id, favoritos, alternarFavorito }: Props & 
       setResultado(null)
       return
     }
-    setResultado(calc.calcular(valores))
+    const fontes: Record<string, string> = {
+      pbw: 'https://www.nejm.org/doi/full/10.1056/NEJM200005043422001',
+      'volume-corrente': 'https://www.nejm.org/doi/full/10.1056/NEJM200005043422001',
+      'volume-minuto': 'https://d1xe7tfg0uwul9.cloudfront.net/amib-portal/wp-content/uploads/2024/09/12100249/Orientacoes-Praticas-de-Ventilacao-Mecanica-Interativo-SET-11-1.pdf',
+      pf: 'https://jamanetwork.com/journals/jama/fullarticle/1160659',
+      'driving-pressure': 'https://www.nejm.org/doi/full/10.1056/NEJMsa1410639',
+      complacencia: 'https://d1xe7tfg0uwul9.cloudfront.net/amib-portal/wp-content/uploads/2024/09/12100249/Orientacoes-Praticas-de-Ventilacao-Mecanica-Interativo-SET-11-1.pdf',
+      resistencia: 'https://d1xe7tfg0uwul9.cloudfront.net/amib-portal/wp-content/uploads/2024/09/12100249/Orientacoes-Praticas-de-Ventilacao-Mecanica-Interativo-SET-11-1.pdf',
+      ie: 'https://d1xe7tfg0uwul9.cloudfront.net/amib-portal/wp-content/uploads/2024/09/12100249/Orientacoes-Praticas-de-Ventilacao-Mecanica-Interativo-SET-11-1.pdf',
+    }
+    const calculado = calc.calcular(valores)
+    setResultado({ ...calculado, referenciaUrl: calculado.referenciaUrl ?? fontes[calc.id] })
   }
 
   const limpar = () => {
@@ -227,7 +243,9 @@ export function CalculadoraDetalhe({ id, favoritos, alternarFavorito }: Props & 
       `${calc.nome}: ${resultado.valor}${resultado.unidade ? ` ${resultado.unidade}` : ''}`,
       ...linhas,
       `Fórmula: ${resultado.formula}`,
-      resultado.referencia,
+      resultado.referenciaUrl
+        ? `${resultado.referencia}\n${resultado.referenciaUrl}`
+        : resultado.referencia,
       DISCLAIMER,
     ].join('\n')
 
@@ -279,7 +297,7 @@ export function CalculadoraDetalhe({ id, favoritos, alternarFavorito }: Props & 
       <div className="calc-layout">
         <form className="card form-card" onSubmit={calcular} noValidate>
           <div className="form-grid">
-            {calc.campos.map((campo) => {
+            {calc.campos.filter((campo) => campoVisivel(campo, valores)).map((campo) => {
               const erro = erros[campo.id]
               if (campo.tipo === 'opcao') {
                 return (
@@ -387,7 +405,13 @@ export function CalculadoraDetalhe({ id, favoritos, alternarFavorito }: Props & 
               <div>
                 <b>Referência</b>
                 <br />
-                {resultado.referencia}
+                {resultado.referenciaUrl ? (
+                  <a href={resultado.referenciaUrl} target="_blank" rel="noreferrer">
+                    {resultado.referencia} <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  resultado.referencia
+                )}
               </div>
             </div>
 

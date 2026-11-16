@@ -11,6 +11,7 @@ export type CampoNumero = {
   padrao?: string
   ajuda?: string
   placeholder?: string
+  quando?: { campoId: string; valores: string[] }
 }
 
 export type CampoOpcao = {
@@ -20,9 +21,12 @@ export type CampoOpcao = {
   opcoes: { valor: string; rotulo: string }[]
   padrao: string
   ajuda?: string
+  quando?: { campoId: string; valores: string[] }
 }
 
 export type Campo = CampoNumero | CampoOpcao
+
+export type Populacao = 'Adulto' | 'Pediatria' | 'Geral'
 
 export type LinhaResultado = { rotulo: string; valor: string }
 
@@ -34,6 +38,7 @@ export type Resultado = {
   interpretacao?: { texto: string; nivel: Nivel }
   formula: string
   referencia: string
+  referenciaUrl?: string
 }
 
 export type Calculadora = {
@@ -41,6 +46,7 @@ export type Calculadora = {
   nome: string
   descricao: string
   grupo: 'Ventilação' | 'Oxigenação' | 'Mecânica'
+  populacao?: Populacao
   campos: Campo[]
   calcular: (valores: Record<string, string>) => Resultado
 }

@@ -4,6 +4,15 @@ PWA de apoio à decisão para fisioterapeutas intensivistas e cardiorrespiratór
 
 **Versão atual: 0.2.0.**
 
+## Novidades da versão 0.2.0
+
+- **Gasometria integrada:** informe pH, PaCO₂, HCO₃⁻, BE, PaO₂ e saturação para receber uma interpretação ácido-base, com indicação do distúrbio provável e da compensação estimada. PaO₂ e saturação aparecem no resultado; a oxigenação não é classificada sem FiO₂.
+- **Cálculo unificado de iNO:** escolha entre concentração administrada, fluxo necessário do cilindro ou índice de oxigenação (IO/OI). O formulário mostra somente os campos necessários ao cálculo selecionado.
+- **Volume corrente com alvo definido pelo profissional:** as calculadoras adulta e pediátrica aceitam um valor específico em mL/kg e retornam um único volume em mL. A faixa disponível começa em 4 mL/kg.
+- **Conteúdo organizado por público:** calculadoras separadas em Adulto, Pediatria e Geral, incluindo CNAF e volumes correntes distintos para adultos e crianças.
+- **Novos índices:** HACOR para estimativa de risco de falha da VNI e ROX para acompanhamento durante CNAF.
+- **Fontes ligadas aos cálculos:** cada resultado apresenta a referência correspondente para consulta.
+
 ## Recursos
 
 - **20 calculadoras e consultas**, organizadas em Adulto, Pediatria e Geral: HACOR, ROX, interpretação integrada da gasometria, cálculo unificado de iNO, volume corrente adulto e pediátrico, CNAF adulto e pediátrico, além de fórmulas de ventilação e mecânica respiratória.
